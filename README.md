@@ -1,6 +1,6 @@
 # OwOfactory Guides
 
-This project automatically OwO-wifis all .md files from [Omnifactory Guides](github.com/RundownRhino/OmnifactoryGuides). I'm sorry.
+This project automatically OwO-wifies all .md files from [Omnifactory Guides](github.com/RundownRhino/OmnifactoryGuides). I'm sorry.
 
 ## Builds
 
@@ -10,7 +10,7 @@ This project automatically OwO-wifis all .md files from [Omnifactory Guides](git
 
 ### Installing and Contributing
 
-The project is built using (NodeJS v13.12.0)[https://nodejs.org/dist/v13.12.0/].
+The project is built using [NodeJS v13.12.0](https://nodejs.org/dist/v13.12.0/).
 
 Clone the repository, run `npm install` and git gud.
 
@@ -22,8 +22,8 @@ To build the project, run
 
 ## Authors and Acknowledgments
 
-* **[NotMyWing](https://github.com/NotMyWing)**
-* **[RundownRhino and OFG contributors](https://github.com/RundownRhino/OmnifactoryGuides)**
+* **[NotMyWing](https://github.com/NotMyWing)** - *This*
+* **[RundownRhino and OFG contributors](https://github.com/RundownRhino/OmnifactoryGuides)** - *OmnifactoryGuides*
 
 ## License
 
