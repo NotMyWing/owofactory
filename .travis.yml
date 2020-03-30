@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - 13
+
+script:
+  - gulp
+
+deploy:
+  - provider: pages
+    github_token: "$GITHUB_TOKEN"
+    skip_cleanup: true
+    local_dir: dest
+    target_branch: dest
+    on:
+      branch: master
