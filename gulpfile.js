@@ -1,13 +1,13 @@
-const { src, dest, series } = require("gulp");
+const { task, src, dest, series } = require("gulp");
 const through2 = require("through2");
 const owoify = require("owoify-js").default;
 const del = require("del");
 const rename = require("gulp-rename");
 
-const owoContents = () => {
+const owoContents = (level) => {
 	return through2.obj((file, _, cb) => {
 		if (file.isBuffer()) {
-			file.contents = Buffer.from(owoify(file.contents.toString()));
+			file.contents = Buffer.from(owoify(file.contents.toString(), level));
 			cb(null, file);
 		}
 	})
@@ -21,23 +21,34 @@ const owoPath = () => {
 	});
 }
 
-function rmrf(cb) {
-	del(["dest/**/*"]).then(() => {
+const levels = ["owo", "uwu", "uvu"];
+
+levels.forEach(level => {
+	task(`cleanup-${level}`, (cb) => {
+		del.sync([`dest-${level}/`]);
 		cb();
 	});
-}
 
-function buildMd() {
-	return src("src/guides/**/*.md")
-		.pipe(owoContents())
-		.pipe(owoPath())
-		.pipe(dest("dest/guides/"));
-}
+	task(`build-${level}`, () => {
+		return src("src/guides/**/*.md")
+			.pipe(owoContents(level))
+			.pipe(owoPath(level))
+			.pipe(dest(`dest-${level}/guides`));
+	});
 
-function copy() {
-	return src(["src/**", "!src/**/*.md"])
-		.pipe(owoPath())
-		.pipe(dest("dest/"));
-}
+	task(`copy-${level}`, () => {
+		return src(["src/**", "!src/**/*.md"])
+			.pipe(owoPath(level))
+			.pipe(dest(`dest-${level}/`));
+	});
 
-exports.default = series(rmrf, buildMd, copy);
+	task(level, series(
+		`cleanup-${level}`
+		, `build-${level}`
+		, `copy-${level}`
+	))
+
+	exports[task] = series(task);
+});
+
+exports.default = series(...levels);
